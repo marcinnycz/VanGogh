@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="RunButton" Content="Run" HorizontalAlignment="Left" Margin="610,195,0,0" VerticalAlignment="Top" Width="75" Click="RunButton_Click"/>
-        <Label x:Name="resultLabel" Content="{Binding Path=result}" HorizontalAlignment="Left" Margin="404,195,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="RunButton" Content="Run" HorizontalAlignment="Left" Margin="541,352,0,0" VerticalAlignment="Top" Width="75" Click="RunButton_Click"/>
+        <Label x:Name="resultLabel" Content="{Binding Path=result}" HorizontalAlignment="Left" Margin="404,375,0,0" VerticalAlignment="Top" Height="28" Width="33" RenderTransformOrigin="2.048,5.402"/>
         <CheckBox x:Name="CB1" Content="1" HorizontalAlignment="Left" Margin="139,68,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="CB2" Content="2" HorizontalAlignment="Left" Margin="139,88,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="CB3" Content="3" HorizontalAlignment="Left" Margin="139,108,0,0" VerticalAlignment="Top"/>
@@ -19,7 +19,21 @@
         <CheckBox x:Name="CB8" Content="8" HorizontalAlignment="Left" Margin="139,208,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="CB9" Content="9" HorizontalAlignment="Left" Margin="139,228,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="CB10" Content="10" HorizontalAlignment="Left" Margin="139,248,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="TestButton" Content="Test" HorizontalAlignment="Left" Margin="610,153,0,0" VerticalAlignment="Top" Width="75" Click="TestButton_Click"/>
+        <Button x:Name="TestButton" Content="Test" HorizontalAlignment="Left" Margin="640,352,0,0" VerticalAlignment="Top" Width="75" Click="TestButton_Click"/>
+        
 
+        <Viewbox HorizontalAlignment="Left" Height="256" Margin="220,68,0,0" VerticalAlignment="Top" Width="256">
+            <Border BorderThickness="2" BorderBrush="Black">
+                <Image x:Name="previewImage" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="256"/>
+            </Border>
+        </Viewbox>
+        <Viewbox HorizontalAlignment="Left" Height="256" Margin="500,68,0,0" VerticalAlignment="Top" Width="256">
+            <Border BorderThickness="2" BorderBrush="Black">
+                <Image x:Name="neuronImage" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="256"/>
+            </Border>
+        </Viewbox>
+        <Button x:Name="nextImgButton" Content="Button" HorizontalAlignment="Left" Margin="362,347,0,0" VerticalAlignment="Top" Width="75" Click="nextImgButton_Click"/>
+        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="32,375,0,0" VerticalAlignment="Top" Width="75" Click="saveButton_Click"/>
+        <Button x:Name="loadButton" Content="Load" HorizontalAlignment="Left" Margin="112,375,0,0" VerticalAlignment="Top" Width="75" Click="loadButton_Click"/>
     </Grid>
 </Window>

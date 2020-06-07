@@ -17,8 +17,12 @@ namespace VanGogh
         private double[][] neuronChange;
         private double[][] biasesChange;
         private double[][][] weightsChange;
+        private double[][] biasesChangeAvg;
+        private int biasesChangeAvgCounter;
+        private double[][][] weightsChangeAvg;
+        private int weightsChangeAvgCounter;
         private double cost = 0;
-        private double learningRate = 0.4;
+        private double learningRate = 0.2;
         //private int[] activations;//layers
 
         //public float fitness = 0;//fitness
@@ -55,6 +59,7 @@ namespace VanGogh
             Random r = new Random();
             List<double[]> biasList = new List<double[]>();
             List<double[]> biasChangeList = new List<double[]>();
+            List<double[]> biasChangeListAvg = new List<double[]>();
             for (int i = 0; i < layers.Length; i++)
             {
                 double[] bias = new double[layers[i]];
@@ -64,9 +69,11 @@ namespace VanGogh
                 }
                 biasList.Add(bias);
                 biasChangeList.Add(new double[layers[i]]);
+                biasChangeListAvg.Add(new double[layers[i]]);
             }
             biases = biasList.ToArray();
             biasesChange = biasChangeList.ToArray();
+            biasesChangeAvg = biasChangeList.ToArray();
         }
 
         //initializes random array for the weights being held in the network.
@@ -75,10 +82,12 @@ namespace VanGogh
             Random r = new Random();
             List<double[][]> weightsList = new List<double[][]>();
             List<double[][]> weightsChangeList = new List<double[][]>();
+            List<double[][]> weightsChangeAvgList = new List<double[][]>();
             for (int i = 1; i < layers.Length; i++)
             {
                 List<double[]> layerWeightsList = new List<double[]>();
                 List<double[]> layerWeightsChangeList = new List<double[]>();
+                List<double[]> layerWeightsChangeAvgList = new List<double[]>();
                 int neuronsInPreviousLayer = layers[i - 1];
                 for (int j = 0; j < neurons[i].Length; j++)
                 {
@@ -89,12 +98,15 @@ namespace VanGogh
                     }
                     layerWeightsList.Add(neuronWeights);
                     layerWeightsChangeList.Add(new double[neuronsInPreviousLayer]);
+                    layerWeightsChangeAvgList.Add(new double[neuronsInPreviousLayer]);
                 }
                 weightsList.Add(layerWeightsList.ToArray());
                 weightsChangeList.Add(layerWeightsChangeList.ToArray());
+                weightsChangeAvgList.Add(layerWeightsChangeAvgList.ToArray());
             }
             weights = weightsList.ToArray();
             weightsChange = weightsChangeList.ToArray();
+            weightsChangeAvg = weightsChangeAvgList.ToArray();
         }
 
         //feed forward, inputs >==> outputs.
@@ -164,6 +176,11 @@ namespace VanGogh
             else
                 return 0;
         }*/
+
+        public void Save(string path)
+        { 
+
+        }
 
         //this loads the biases and weights from within a file into the neural network.
         public void Load(string path)
@@ -247,6 +264,8 @@ namespace VanGogh
         {
             return neurons[0];
         }
+
+
 
         /*
         //used as a simple mutation function for any genetic implementations.
