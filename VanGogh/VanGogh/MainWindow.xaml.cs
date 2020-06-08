@@ -27,17 +27,26 @@ namespace VanGogh
     /// </summary>
     public partial class MainWindow : Window
     {
-        const int INPUT_LAYERS = 256 * 256 * 3;
+        const int IMAGE_SIZE = 256;
+        const int INPUT_LAYERS = IMAGE_SIZE * IMAGE_SIZE * 3;
         NeuralNetwork network;
         double result;
         Bitmap starryNight;
         Bitmap notStarry;
-        
+
         public MainWindow()
         {
             InitializeComponent();
-            int[] layers = { INPUT_LAYERS, 20, 10, 1 };
+            int[] layers = { INPUT_LAYERS, 75, 1 };
             network = new NeuralNetwork(layers);
+
+           
+
+            //starryNight = new Bitmap("G:/VanGogh/red.jpg");
+            //notStarry = new Bitmap("G:/VanGogh/blue.jpg");
+
+            //starryNight = new Bitmap("G:/VanGogh/red.jpg");
+            //notStarry = new Bitmap("G:/VanGogh/blue.jpg");
             starryNight = new Bitmap("G:/VanGogh/starrynight.jpg");
             notStarry = new Bitmap("G:/VanGogh/notstarry/mona.bmp");
         }
@@ -46,33 +55,33 @@ namespace VanGogh
         {
 
             Random rnd = new Random();
-            System.Drawing.Rectangle cropRect = new System.Drawing.Rectangle(rnd.Next(0, source.Width - 257), rnd.Next(0, source.Height - 257), 256, 256);
+            System.Drawing.Rectangle cropRect = new System.Drawing.Rectangle(rnd.Next(0, source.Width - IMAGE_SIZE), rnd.Next(0, source.Height - IMAGE_SIZE), IMAGE_SIZE, IMAGE_SIZE);
             Bitmap imgPart = source.Clone(cropRect, source.PixelFormat);
             BitmapSource src = CreateBitmapSourceFromBitmap(imgPart);
-            Bitmap testBmp = new Bitmap(256, 256);
+            Bitmap testBmp = new Bitmap(IMAGE_SIZE, IMAGE_SIZE);
            
-            byte[] arr = new byte[256 * 256 * 3];
-            for (int y = 0; y < 256; y++)
+            byte[] arr = new byte[IMAGE_SIZE * IMAGE_SIZE * 3];
+            for (int y = 0; y < IMAGE_SIZE; y++)
             { 
-                for (int x = 0; x < 256; x++)
+                for (int x = 0; x < IMAGE_SIZE; x++)
                 {
 
                     System.Drawing.Color color = imgPart.GetPixel(x, y);
 
-                    arr[y * 256 * 3 + x * 3] = color.R;
-                    arr[y * 256 * 3 + x * 3 + 1] = color.G;
-                    arr[y * 256 * 3 + x * 3 + 2] = color.B;
+                    arr[y * IMAGE_SIZE * 3 + x * 3] = color.R;
+                    arr[y * IMAGE_SIZE * 3 + x * 3 + 1] = color.G;
+                    arr[y * IMAGE_SIZE * 3 + x * 3 + 2] = color.B;
 
                        
                 }
             }
-            for (int y = 0; y < 256; y++)
+            for (int y = 0; y < IMAGE_SIZE; y++)
             {
-                for (int x = 0; x < 256; x++)
+                for (int x = 0; x < IMAGE_SIZE; x++)
                 {
-                    byte r = arr[y * 256 * 3 + x * 3];
-                    byte g = arr[y * 256 * 3 + x * 3 + 1];
-                    byte b = arr[y * 256 * 3 + x * 3 + 2];
+                    byte r = arr[y * IMAGE_SIZE * 3 + x * 3];
+                    byte g = arr[y * IMAGE_SIZE * 3 + x * 3 + 1];
+                    byte b = arr[y * IMAGE_SIZE * 3 + x * 3 + 2];
                     System.Drawing.Color color = System.Drawing.Color.FromArgb(255, r, g, b);
 
                     testBmp.SetPixel(x, y, color);
@@ -130,21 +139,26 @@ namespace VanGogh
                 resultLabel.Content = result;
             }*/
             Random rnd = new Random();
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 250; i++)
             {
                 double[] inputs = new double[INPUT_LAYERS];
-                byte[] inputImage = new byte[256 * 256 * 3];
-                int correct = rnd.Next(0, 11);
-                if (correct > 3)
+                byte[] inputImage = new byte[IMAGE_SIZE * IMAGE_SIZE * 3];
+                int correct = rnd.Next(0, 10);
+                if (correct > 4)
                 {
+                    //string path = "G:/VanGogh/o/" + rnd.Next(1, 11) + ".png" ;
+                    //inputImage = randomPart(new Bitmap(path));
                     inputImage = randomPart(starryNight);
-                }else
+                }
+                else
                 {
+                    //string path = "G:/VanGogh/x/" + rnd.Next(1, 11) + ".png";
+                    //inputImage = randomPart(new Bitmap(path));
                     inputImage = randomPart(notStarry);
                 }
                 for (int j = 0; j < INPUT_LAYERS; j++)
                 {
-                    inputs[j] = inputImage[j]/255;
+                    inputs[j] = inputImage[j]/255.0;
                 }
                 network.FeedForward(inputs);
                 if (correct > 3)
@@ -206,20 +220,24 @@ namespace VanGogh
             }*/
 
             double[] inputs = new double[INPUT_LAYERS];
-            byte[] inputImage = new byte[256 * 256 * 3];
+            byte[] inputImage = new byte[IMAGE_SIZE * IMAGE_SIZE * 3];
             Random rnd = new Random();
             int correct = rnd.Next(0, 11);
             if (correct > 3)
             {
+                //string path = "G:/VanGogh/o/" + rnd.Next(1, 11) + ".png";
+                //inputImage = randomPart(new Bitmap(path));
                 inputImage = randomPart(starryNight);
             }
             else
             {
+                //string path = "G:/VanGogh/x/" + rnd.Next(1, 11) + ".png";
+                //inputImage = randomPart(new Bitmap(path));
                 inputImage = randomPart(notStarry);
             }
             for (int j = 0; j < INPUT_LAYERS; j++)
             {
-                inputs[j] = inputImage[j] / 255;
+                inputs[j] = inputImage[j] / 255.0;
             }
             network.FeedForward(inputs);
            
@@ -236,12 +254,12 @@ namespace VanGogh
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-
+            network.Save("neuralsave.txt");
         }
 
         private void loadButton_Click(object sender, RoutedEventArgs e)
         {
-
+            network.Load("neuralsave.txt");
         }
     }
 }

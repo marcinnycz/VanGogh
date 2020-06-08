@@ -7,33 +7,40 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="RunButton" Content="Run" HorizontalAlignment="Left" Margin="541,352,0,0" VerticalAlignment="Top" Width="75" Click="RunButton_Click"/>
-        <Label x:Name="resultLabel" Content="{Binding Path=result}" HorizontalAlignment="Left" Margin="404,375,0,0" VerticalAlignment="Top" Height="28" Width="33" RenderTransformOrigin="2.048,5.402"/>
-        <CheckBox x:Name="CB1" Content="1" HorizontalAlignment="Left" Margin="139,68,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CB2" Content="2" HorizontalAlignment="Left" Margin="139,88,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CB3" Content="3" HorizontalAlignment="Left" Margin="139,108,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CB4" Content="4" HorizontalAlignment="Left" Margin="139,128,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CB5" Content="5" HorizontalAlignment="Left" Margin="139,148,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CB6" Content="6" HorizontalAlignment="Left" Margin="139,168,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CB7" Content="7" HorizontalAlignment="Left" Margin="139,188,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CB8" Content="8" HorizontalAlignment="Left" Margin="139,208,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CB9" Content="9" HorizontalAlignment="Left" Margin="139,228,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CB10" Content="10" HorizontalAlignment="Left" Margin="139,248,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="TestButton" Content="Test" HorizontalAlignment="Left" Margin="640,352,0,0" VerticalAlignment="Top" Width="75" Click="TestButton_Click"/>
-        
+        <Button x:Name="RunButton" Content="Train" HorizontalAlignment="Left" Margin="510,337,0,0" VerticalAlignment="Top" Width="75" Click="RunButton_Click"/>
 
-        <Viewbox HorizontalAlignment="Left" Height="256" Margin="220,68,0,0" VerticalAlignment="Top" Width="256">
+        <Label x:Name="resultLabel" Content="{Binding Path=result}" HorizontalAlignment="Left" Margin="400,170,0,0" VerticalAlignment="Top" Height="28" Width="32" RenderTransformOrigin="2.048,5.402"/>
+
+        <Button x:Name="TestButton" Content="Test" HorizontalAlignment="Left" Margin="590,337,0,0" VerticalAlignment="Top" Width="75" Click="TestButton_Click"/>
+
+
+        <Grid HorizontalAlignment="Left" Height="256" Margin="123,68,0,0" VerticalAlignment="Top" Width="256">
             <Border BorderThickness="2" BorderBrush="Black">
                 <Image x:Name="previewImage" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="256"/>
             </Border>
-        </Viewbox>
-        <Viewbox HorizontalAlignment="Left" Height="256" Margin="500,68,0,0" VerticalAlignment="Top" Width="256">
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="256" Margin="455,68,0,0" VerticalAlignment="Top" Width="256">
             <Border BorderThickness="2" BorderBrush="Black">
-                <Image x:Name="neuronImage" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="256"/>
+                <Image x:Name="neuronImage" HorizontalAlignment="Center"  VerticalAlignment="Center" Stretch="None"/>
             </Border>
-        </Viewbox>
-        <Button x:Name="nextImgButton" Content="Button" HorizontalAlignment="Left" Margin="362,347,0,0" VerticalAlignment="Top" Width="75" Click="nextImgButton_Click"/>
-        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="32,375,0,0" VerticalAlignment="Top" Width="75" Click="saveButton_Click"/>
-        <Button x:Name="loadButton" Content="Load" HorizontalAlignment="Left" Margin="112,375,0,0" VerticalAlignment="Top" Width="75" Click="loadButton_Click"/>
+        </Grid>
+        <Button x:Name="nextImgButton" Content="Image" HorizontalAlignment="Left" Margin="213,337,0,0" VerticalAlignment="Top" Width="75" Click="nextImgButton_Click"/>
+        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="614,383,0,0" VerticalAlignment="Top" Width="75" Click="saveButton_Click"/>
+        <Button x:Name="loadButton" Content="Load" HorizontalAlignment="Left" Margin="694,383,0,0" VerticalAlignment="Top" Width="75" Click="loadButton_Click" RenderTransformOrigin="0.515,-0.249"/>
+        <StackPanel HorizontalAlignment="Left" Height="153" Margin="32,113,0,0" VerticalAlignment="Top" Width="43">
+            <CheckBox x:Name="CB1" Content="1" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="-3.101,3.32"/>
+            <CheckBox x:Name="CB2" Content="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <CheckBox x:Name="CB3" Content="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <CheckBox x:Name="CB4" Content="4" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <CheckBox x:Name="CB5" Content="5" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <CheckBox x:Name="CB6" Content="6" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="-4.386,2.668"/>
+            <CheckBox x:Name="CB7" Content="7" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <CheckBox x:Name="CB8" Content="8" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <CheckBox x:Name="CB9" Content="9" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.939,5.635"/>
+            <CheckBox x:Name="CB10" Content="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </StackPanel>
+        <Label Content="Preview" HorizontalAlignment="Left" Margin="226,37,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.393,0.585"/>
+        <Label Content="Neural network preview" HorizontalAlignment="Left" Margin="518,37,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.393,0.585"/>
+        <Label Content="Prediction:&#xD;&#xA;" HorizontalAlignment="Left" Margin="384,154,0,0" VerticalAlignment="Top" Height="26"/>
     </Grid>
 </Window>

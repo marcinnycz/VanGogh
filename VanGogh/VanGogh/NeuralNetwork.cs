@@ -22,7 +22,7 @@ namespace VanGogh
         private double[][][] weightsChangeAvg;
         private int weightsChangeAvgCounter;
         private double cost = 0;
-        private double learningRate = 0.2;
+        private double learningRate = 0.1;
         //private int[] activations;//layers
 
         //public float fitness = 0;//fitness
@@ -177,11 +177,6 @@ namespace VanGogh
                 return 0;
         }*/
 
-        public void Save(string path)
-        { 
-
-        }
-
         //this loads the biases and weights from within a file into the neural network.
         public void Load(string path)
         {
@@ -216,6 +211,32 @@ namespace VanGogh
                     }
                 }
             }
+        }
+
+        public void Save(string path)//this is used for saving the biases and weights within the network to a file.
+        {
+            File.Create(path).Close();
+            StreamWriter writer = new StreamWriter(path, true);
+
+            for (int i = 0; i < biases.Length; i++)
+            {
+                for (int j = 0; j < biases[i].Length; j++)
+                {
+                    writer.WriteLine(biases[i][j]);
+                }
+            }
+
+            for (int i = 0; i < weights.Length; i++)
+            {
+                for (int j = 0; j < weights[i].Length; j++)
+                {
+                    for (int k = 0; k < weights[i][j].Length; k++)
+                    {
+                        writer.WriteLine(weights[i][j][k]);
+                    }
+                }
+            }
+            writer.Close();
         }
 
         public void Backprop(double expected)
@@ -264,33 +285,5 @@ namespace VanGogh
         {
             return neurons[0];
         }
-
-
-
-        /*
-        //used as a simple mutation function for any genetic implementations.
-        public void Mutate(int chance, float val)
-        {
-            for (int i = 0; i < biases.Length; i++)
-            {
-                for (int j = 0; j < biases[i].Length; j++)
-                {
-                    biases[i][j] = (UnityEngine.Random.Range(0f, chance) <= 5) ? biases[i][j] += UnityEngine.Random.Range(-val, val) : biases[i][j];
-                }
-            }
-
-            for (int i = 0; i < weights.Length; i++)
-            {
-                for (int j = 0; j < weights[i].Length; j++)
-                {
-                    for (int k = 0; k < weights[i][j].Length; k++)
-                    {
-                        weights[i][j][k] = (UnityEngine.Random.Range(0f, chance) <= 5) ? weights[i][j][k] += UnityEngine.Random.Range(-val, val) : weights[i][j][k];
-
-                    }
-                }
-            }
-        }*/
-
     }
 }
